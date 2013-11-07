@@ -1,6 +1,8 @@
 import json
 from collections import defaultdict
 
+from nltk.tokenize.punkt import PunktWordTokenizer
+
 
 class SymbolDictionary(defaultdict):
     """Wrapper class containing translator functions"""
@@ -43,6 +45,31 @@ class SymbolDictionary(defaultdict):
         pass
 
 
+class Translator:
+    """docstring for Translator"""
+    def __init__(self, *dictionaries):
+        self.tokenizer = PunktWordTokenizer()
+        self.dictionaries = dictionaries
+
+    def translate(self, sentence):
+        tokens = self.tokenizer.tokenize(sentence)
+
+        def tr(word):
+            for d in self.dictionaries:
+                found = d[word]
+                if found is not None:
+                    return found
+            else:
+                return word
+
+        return [tr(w) for w in tokens]
+        # return ' '.join([tr(w) for w in tokens])
+
+
+
+
+
+#############################################################################
 
 def test(d):
     pass
@@ -50,7 +77,9 @@ def test(d):
 
 def main():
     d = SymbolDictionary("/Users/Omer/dev/Mojifi/emoji-clean.json", None)
-    print d["swim"]
+    t = Translator(d)
+    print t.translate("The quick brown fox jumps over the lazy dog")
+    # print d["swim"]
     # test(d)
 
 
