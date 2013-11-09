@@ -40,7 +40,7 @@ def main():
 
     # Server Config
     settings = dict(
-        template_path="html/",
+        template_path=abs_path("html/"),
         debug=True)
 
     server_settings = dict(
@@ -51,8 +51,8 @@ def main():
     # Server Startup
     logging.info("Running Tornado at http://localhost:%s" % options.port)
     application = tornado.web.Application([
-        (r"/js/(.*)", StaticFileHandler, {'path': 'js/'}),
-        (r"/css/(.*)", StaticFileHandler, {'path': 'css/'}),
+        (r"/js/(.*)", StaticFileHandler, {'path': abs_path('js/')}),
+        (r"/css/(.*)", StaticFileHandler, {'path': abs_path('css/')}),
         (r"/(.*)", MainHandler, dict(translator=t))],
         **settings)
 
