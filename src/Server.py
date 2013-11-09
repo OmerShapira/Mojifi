@@ -1,6 +1,11 @@
+import os
 import tornado.web
 from tornado.web import StaticFileHandler
 import Mojifi
+
+
+def abs_path(filename):
+    return os.path.join(os.getcwd(), filename)
 
 
 class MainHandler(tornado.web.RequestHandler):
@@ -10,6 +15,7 @@ class MainHandler(tornado.web.RequestHandler):
 
     def get(self, *args):
         self.render(
+            #TODO: Define template_path properly
             "html/main.html",
             text=' '.join(self.translator.translate(' '.join(args))))
 
@@ -18,20 +24,19 @@ class MainHandler(tornado.web.RequestHandler):
 
 
 def main():
-    d = Mojifi.SymbolDictionary("/Users/Omer/dev/Mojifi/emoji-mdown.json", None)
+    d = Mojifi.SymbolDictionary("dicts/emoji-mdown.json", None)
     t = Mojifi.Translator(d)
 
-    # settings = dict(
-    #     template_path=os.path.join(os.path.dirname(__file__), "templates")
-
-    # settings = dict(js_path="/js/", less_path="/less/")
+    settings = dict(
+        # template_path="html/",
+        debug=True)
 
     application = tornado.web.Application([
         (r"/js/(.*)", StaticFileHandler, {'path': 'js/'}),
         (r"/css/(.*)", StaticFileHandler, {'path': 'css/'}),
         (r"/(.*)", MainHandler, dict(translator=t))
-    ], debug=True)
-    application.listen(8887)
+    ], settings)
+    application.listen(8888)
     tornado.ioloop.IOLoop.instance().start()
 
 
