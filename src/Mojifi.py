@@ -4,6 +4,10 @@ from collections import defaultdict
 from nltk.tokenize.punkt import PunktWordTokenizer
 
 
+def clean(s):
+        return unicode(s).lower()
+
+
 class SymbolDictionary(defaultdict):
     """Wrapper class containing translator functions"""
     def __init__(self, filename, encoding):
@@ -19,17 +23,14 @@ class SymbolDictionary(defaultdict):
 
         self.is_locked = True
 
-    def clean(self, s):
-        return unicode(s).lower()
-
     def __setitem__(self, key, value):
         if not self.is_locked:
             islist = lambda x: isinstance(x, list)
-            keys_as_list = [self.clean(k) for k in key] if islist(key) else [self.clean(key)]
+            key_list = [clean(k) for k in key] if islist(key) else [clean(key)]
             # Add a set unless it's there
             superclass = super(SymbolDictionary, self)
             value_as_list = value if islist(value) else [value]
-            for k in keys_as_list:
+            for k in key_list:
                 #FIXME: Check if values as lists are still neccessary
                 if superclass.__contains__(k):
                     # Non-functional
@@ -38,7 +39,7 @@ class SymbolDictionary(defaultdict):
                     superclass.__setitem__(k, value_as_list)
 
     def __getitem__(self, key):
-        return super(SymbolDictionary, self).__getitem__(self.clean(key))
+        return super(SymbolDictionary, self).__getitem__(clean(key))
 
     def __missing__(self, key):
         #TODO: Implement this sucker
@@ -54,6 +55,14 @@ class Translator:
     def translate(self, sentence):
         tokens = self.tokenizer.tokenize(sentence)
 
+        def select_value(l):
+            '''Should select the corect value'''
+            #TODO: Implement
+            if isinstance(l, list):
+                return l[0]
+            else:
+                return l
+
         def tr(word):
             for d in self.dictionaries:
                 found = d[word]
@@ -62,11 +71,8 @@ class Translator:
             else:
                 return word
 
-        return [tr(w) for w in tokens]
+        return [select_value(tr(w)) for w in tokens]
         # return ' '.join([tr(w) for w in tokens])
-
-
-
 
 
 #############################################################################
@@ -76,11 +82,9 @@ def test(d):
 
 
 def main():
-    d = SymbolDictionary("/Users/Omer/dev/Mojifi/emoji-clean.json", None)
+    d = SymbolDictionary("/Users/Omer/dev/Mojifi/emoji-mdown.json", None)
     t = Translator(d)
     print t.translate("The quick brown fox jumps over the lazy dog")
-    # print d["swim"]
-    # test(d)
 
 
 if __name__ == '__main__':
