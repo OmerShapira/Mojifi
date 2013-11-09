@@ -8,8 +8,9 @@ import Mojifi
 
 ######################################################################
 
+
 def abs_path(filename):
-    return os.path.join(os.getcwd(), filename)
+    return os.path.join(os.path.dirname(__file__), filename)
 
 
 class MainHandler(tornado.web.RequestHandler):
@@ -26,14 +27,14 @@ class MainHandler(tornado.web.RequestHandler):
 ######################################################################
 
 define("port", default=8888, help="run on the given port", type=int)
-dict_path = "dicts/emoji-mdown.json"
+dict_path = abs_path("dicts/emoji-mdown.json")
 
 ######################################################################
 
 
 def main():
     # TODO : Prettify this code
-    logging.info("Loading Dictionary from: {}".format(dict_path))
+    logging.info("Loading Dictionary from: %s" % dict_path)
     d = Mojifi.SymbolDictionary(dict_path, None)
     t = Mojifi.Translator(d)
 
