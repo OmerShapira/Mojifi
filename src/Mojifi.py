@@ -57,7 +57,7 @@ class Translator:
 
         def select_value(l):
             '''Should select the corect value'''
-            #TODO: Implement
+            #TODO: Implement this, right now has default behavior
             if isinstance(l, list):
                 return l[0]
             else:
@@ -72,7 +72,6 @@ class Translator:
                 return word
 
         return [select_value(tr(w)) for w in tokens]
-        # return ' '.join([tr(w) for w in tokens])
 
 
 #############################################################################
@@ -82,7 +81,7 @@ def test(d):
 
 
 def main():
-    d = SymbolDictionary("/Users/Omer/dev/Mojifi/emoji-mdown.json", None)
+    d = SymbolDictionary("dicts/emoji-mdown.json", None)
     t = Translator(d)
     print t.translate("The quick brown fox jumps over the lazy dog")
 
