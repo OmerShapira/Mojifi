@@ -6,7 +6,7 @@
 ":snowman:" : ["snowman","SNOWMAN WITHOUT SNOW"],
 ":zap:" : ["zap","HIGH VOLTAGE SIGN"],
 ":cyclone:" : ["cyclone","typhoon", "hurricane"],
-":foggy:" : ["foggy"],
+":foggy:" : ["fog", "foggy"],
 ":ocean:" : ["ocean","WATER WAVE"],
 ":cat:" : ["cat","CAT FACE"],
 ":dog:" : ["dog","DOG FACE"],
