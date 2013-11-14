@@ -453,7 +453,7 @@
 ":notes:" : ["notes","MULTIPLE MUSICAL NOTES","dancing notes", "mood", "melody"],
 ":musical_note:" : ["musical note","music", "good mood"],
 ":fire:" : ["fire","FIRE"],
-":hankey, :poop, :shit:" : ["hankey, :poop, :shit","PILE OF POO","dog dirt"],
+":poop:" : ["hankey, :poop, :shit","PILE OF POO","dog dirt"],
 ":thumbsup:" : ["thumbsup","THUMBS UP SIGN"],
 ":thumbsdown:" : ["thumbsdown","THUMBS DOWN SIGN"],
 ":ok_hand:" : ["ok hand","OK HAND SIGN"],

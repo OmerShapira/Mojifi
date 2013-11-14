@@ -453,7 +453,7 @@
 "&#x1F3B6;": {":notes" : ["notes","MULTIPLE MUSICAL NOTES","dancing notes", "mood", "melody"]},
 "&#x1F3B5;": {":musical_note" : ["musical_note","music", "good mood"]},
 "&#x1F525;": {":fire" : ["fire","FIRE"]},
-"&#x1F4A9;": {":hankey, :poop, :shit" : ["hankey, :poop, :shit","PILE OF POO","dog dirt"]},
+"&#x1F4A9;": {":hankey, :poop, :shit" : ["hankey", "poop", "shit","PILE OF POO","dog dirt"]},
 "&#x1F44D;": {":thumbsup" : ["thumbsup","THUMBS UP SIGN"]},
 "&#x1F44E;": {":thumbsdown" : ["thumbsdown","THUMBS DOWN SIGN"]},
 "&#x1F44C;": {":ok_hand" : ["ok_hand","OK HAND SIGN"]},
